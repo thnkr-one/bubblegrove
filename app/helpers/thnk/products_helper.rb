@@ -1,0 +1,2 @@
+module Thnk::ProductsHelper
+end

@@ -1,0 +1,21 @@
+<!-- app/views/thnk/products/bulk_print.pdf.erb -->
+
+<h1 class="text-2xl font-bold mb-6">Bulk QR Codes for Category: <%= @category %></h1>
+
+<% @products.each do |product| %>
+  <% product.thnk_variants.each do |variant| %>
+    <div class="product mb-8">
+      <h2 class="text-xl font-semibold mb-2"><%= "#{product.title} - #{variant.variant_sku}" %></h2>
+      <% if variant.qr_code_image.attached? %>
+        <div class="container" style="position: relative; width: 300px; height: 300px;">
+          <%= image_tag variant.qr_code_image, alt: "QR Code for #{product.title} - #{variant.variant_sku}", style: "width: 300px; height: 300px;" %>
+          <div class="price" style="position: absolute; bottom: 10px; left: 10px; font-size: 24px; color: black;">
+            $<%= variant.variant_price.to_f.round(2) %>
+          </div>
+        </div>
+      <% else %>
+        <p>No QR Code available.</p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

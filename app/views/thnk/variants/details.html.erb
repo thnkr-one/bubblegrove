@@ -1,0 +1,42 @@
+<!-- app/views/variants/details.html.erb -->
+
+<h1 class="text-3xl font-bold mb-6"><%= @product.title %> - <%= @variant.variant_sku %></h1>
+
+<div class="flex flex-col md:flex-row">
+  <!-- Variant Images -->
+  <div class="md:w-1/2 mb-6 md:mb-0">
+    <% if @variant.images.attached? %>
+      <div class="carousel space-y-4">
+        <% @variant.images.each_with_index do |image, index| %>
+          <%= image_tag image, class: "w-full h-64 object-cover rounded-lg", alt: "#{@product.title} Image #{index + 1}" %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= image_tag 'placeholder.png', class: "w-full h-64 object-cover rounded-lg", alt: "No Image Available" %>
+    <% end %>
+
+    <% if @variant.qr_code_image.attached? %>
+      <div class="mt-6 flex justify-center">
+        <%= image_tag @variant.qr_code_image, class: "w-48 h-48 object-contain", alt: "QR Code for #{@product.title} - #{@variant.variant_sku}" %>
+      </div>
+    <% else %>
+      <p class="text-center text-red-500 mt-4">No QR Code available.</p>
+    <% end %>
+  </div>
+
+  <!-- Variant Details -->
+  <div class="md:w-1/2 md:pl-6">
+    <p class="text-gray-700 dark:text-neutral-300 mb-4"><%= @product.body %></p>
+    <ul class="list-disc list-inside text-gray-700 dark:text-neutral-300">
+      <li><strong>Vendor:</strong> <%= @product.vendor %></li>
+      <li><strong>Category:</strong> <%= @product.product_category %></li>
+      <li><strong>Type:</strong> <%= @product.product_type %></li>
+      <li><strong>Tags:</strong> <%= @product.tags %></li>
+      <li><strong>Published:</strong> <%= @product.published ? "Yes" : "No" %></li>
+      <li><strong>Status:</strong> <%= @product.status.capitalize %></li>
+      <li><strong>Variant SKU:</strong> <%= @variant.variant_sku %></li>
+      <li><strong>Price:</strong> $<%= number_to_currency(@variant.variant_price, unit: '') %></li>
+      <!-- Add more variant-specific details as needed -->
+    </ul>
+  </div>
+</div>

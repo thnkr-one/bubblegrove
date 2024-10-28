@@ -1,0 +1,91 @@
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Chat Message Input</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<div class=" ">
+<div id="parentComponent" class="w-full h-[75vh]  rounded-2xl  flex items-center justify-center">
+  <div id="chatComponent" class="w-[90%] h-[90%] mb-32 flex flex-col">
+    <div id="chatMessages" class="flex-grow overflow-y-auto flex flex-col justify-end mb-4">
+      <div id="messagesContainer">
+        <!-- Chat messages will be appended here -->
+      </div>
+    </div>
+    <div class="relative">
+      <textarea id="messageInput" class="p-4 pb-12 block w-full bg-slate-200  border-gray-300 rounded-lg text-sm  " placeholder="Ask me anything..."></textarea>
+      <!-- Toolbar -->
+      <div class="absolute bottom-px inset-x-px p-2 rounded-b-lg bg-slate-200">
+        <div class="flex justify-between items-center">
+          <!-- Left Button Group -->
+          <div class="flex items-center">
+            <button type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:bg-white focus:z-10 focus:outline-none focus:bg-white">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><line x1="9" x2="15" y1="15" y2="9"/></svg>
+            </button>
+            <button type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:bg-white focus:z-10 focus:outline-none focus:bg-white">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            </button>
+          </div>
+          <!-- Right Button Group -->
+          <div class="flex items-center gap-x-1">
+            <button type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:bg-white focus:z-10 focus:outline-none focus:bg-white">
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+            </button>
+            <button id="sendButton" type="button" class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-white bg-slate-400 hover:bg-blue-500 focus:z-10 focus:outline-none focus:bg-blue-500">
+              <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        const messageInput = $('#messageInput');
+        const sendButton = $('#sendButton');
+        const chatMessages = $('#chatMessages');
+        const messagesContainer = $('#messagesContainer');
+
+        function addMessage(message, sender) {
+            const messageElement = $('<div>').addClass('mb-4 ' + (sender === 'user' ? 'text-right' : 'text-left'));
+            const messageContent = $('<span>').addClass('inline-block p-2 rounded-lg ' + (sender === 'user' ? 'bg-slate-200 bg-opacity-10 border border-gray-300 text-black' : 'bg-gray-200 text-gray-800')).text(message);
+            messageElement.append(messageContent);
+            messagesContainer.append(messageElement);
+
+            chatMessages.scrollTop(chatMessages[0].scrollHeight);
+        }
+
+        function sendMessage() {
+            const message = messageInput.val().trim();
+            if (message) {
+                addMessage(message, 'user');
+                messageInput.val('');
+
+                setTimeout(() => {
+                    addMessage("Thanks for your message! This is a simulated response.", 'bot');
+                }, 1000);
+            }
+        }
+
+        sendButton.on('click', sendMessage);
+
+        messageInput.on('keypress', function(e) {
+            if (e.which === 13 && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Placeholder functionality for other buttons
+        $('.inline-flex').not('#sendButton').on('click', function() {
+            alert('This feature is not implemented in this demo.');
+        });
+    });
+</script>
+</div>

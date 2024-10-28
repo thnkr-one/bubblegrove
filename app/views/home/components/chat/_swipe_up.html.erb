@@ -1,0 +1,88 @@
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swipe Up to Chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+      .chat-handle {
+          clip-path: ellipse(50% 100% at 50% 100%);
+          transition: height 0.3s ease-out;
+      }
+  </style>
+</head>
+
+<div id="chatComponent" class="bg-transparent  rounded px-4 h-screen overflow-hidden fixed bottom-1 mb-0.5 pb-0.5 left-0 right-0 transition-all duration-300 ease-in-out h-16">
+  <div class="chat-handle  h-16 flex flex-col items-center justify-center cursor-pointer">
+    <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+    </svg>
+    <p class="text-sm text-gray-600 mt-1">Swipe up or click to chat</p>
+  </div>
+  <div class="  h-[calc(75vh-4rem)] p-4 overflow-y-auto">
+
+<%= render 'home/components/chat/input' %>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        let isDragging = false;
+        let startY;
+        let startHeight;
+        const maxHeight = window.innerHeight * 0.75;
+        const handleHeight = 64; // 4rem = 64px
+
+        function setClosedState() {
+            $('#chatComponent').height(handleHeight);
+        }
+
+        function setOpenState() {
+            $('#chatComponent').height(maxHeight);
+        }
+
+        // Set initial closed state
+        setClosedState();
+
+        $('.chat-handle').on('mousedown touchstart', function(e) {
+            isDragging = true;
+            startY = e.type === 'mousedown' ? e.pageY : e.originalEvent.touches[0].pageY;
+            startHeight = $('#chatComponent').height();
+            e.preventDefault();
+        });
+
+        $(document).on('mousemove touchmove', function(e) {
+            if (!isDragging) return;
+
+            let currentY = e.type === 'mousemove' ? e.pageY : e.originalEvent.touches[0].pageY;
+            let deltaY = startY - currentY;
+            let newHeight = Math.min(Math.max(startHeight + deltaY, handleHeight), maxHeight);
+
+            $('#chatComponent').height(newHeight);
+        });
+
+        $(document).on('mouseup touchend', function() {
+            if (!isDragging) return;
+            isDragging = false;
+
+            let currentHeight = $('#chatComponent').height();
+
+            if (currentHeight > maxHeight / 2) {
+                setOpenState();
+            } else {
+                setClosedState();
+            }
+        });
+
+        $('.chat-handle').on('click', function() {
+            let currentHeight = $('#chatComponent').height();
+
+            if (currentHeight <= handleHeight) {
+                setOpenState();
+            } else {
+                setClosedState();
+            }
+        });
+    });
+</script>

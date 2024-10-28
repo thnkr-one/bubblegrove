@@ -1,0 +1,190 @@
+<!-- app/views/thnk/products/index.html.erb -->
+<link rel="stylesheet" href="https://storage.googleapis.com/pre-line-cdn/google_preline_css.css">
+<div class="my-2 mx-5">
+  <h1 class="text-3xl font-bold mb-6">Products</h1>
+
+  <!-- Bulk Print by Category -->
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Bulk Print QR Codes by Category</h2>
+    <%= form_with url: bulk_print_thnk_products_path, method: :get, local: true, class: "flex items-center space-x-4" do |form| %>
+      <div>
+        <%= label_tag :category, "Select Category:", class: "block text-sm font-medium text-gray-700" %>
+        <%= select_tag :category, options_for_select(@categories), prompt: "Choose a category", class: "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" %>
+      </div>
+      <div class="mt-6">
+        <%= submit_tag "Bulk Print", class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Products Table Card -->
+  <div class="p-5 flex flex-col bg-white border border-stone-200 shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+    <!-- Filter Group -->
+    <!-- ... (Include your existing Filter Group code if applicable) -->
+    <div class="pb-4 flex justify-between items-center flex-wrap gap-2 md:gap-5 border-b border-stone-200 dark:border-neutral-700">
+      <div>
+        <h2 class="inline-block font-semibold text-stone-800 dark:text-neutral-200">
+          Top products
+        </h2>
+      </div>
+      <!-- End Col -->
+
+      <div>
+        <!-- Search Input -->
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
+            <svg class="shrink-0 size-4 text-stone-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <input type="text" class="py-[7px] ps-10 pe-8 block w-full min-w-[300px] bg-stone-100 border-transparent rounded-lg text-sm placeholder:text-stone-500 focus:bg-white focus:border-green-500 focus:ring-green-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:bg-neutral-800 dark:focus:ring-neutral-600" placeholder="Search products">
+          <div class="hidden absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-1">
+            <button type="button" class="inline-flex shrink-0 justify-center items-center size-6 rounded-full text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500" aria-label="Close">
+              <span class="sr-only">Close</span>
+              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <!-- End Search Input -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Filter Group -->
+    <div class="overflow-x-auto">
+      <div class="min-w-full inline-block align-middle">
+        <!-- Table -->
+        <table class="min-w-full divide-y divide-stone-200 dark:divide-neutral-700">
+          <thead>
+          <tr>
+            <th scope="col" class="ps-3 text-start">
+              <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+            </th>
+            <th scope="col" class="min-w-[300px] lg:min-w-[500px] px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Item
+              <!-- Sort Dropdown (Optional) -->
+              <!-- ... (Include your sort dropdown code if needed) -->
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Change
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Price
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Sold
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Sales
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              QR Code
+            </th>
+          </tr>
+          </thead>
+
+          <tbody class="divide-y divide-stone-200 dark:divide-neutral-700">
+          <% @products.each do |product| %>
+            <% product.thnk_variants.each do |variant| %>
+              <tr class="hover:bg-stone-100 cursor-pointer dark:hover:bg-neutral-900">
+                <td class="px-3 py-3 whitespace-nowrap">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                </td>
+                <td class="px-6 py-3 whitespace-nowrap relative">
+                  <a href="#"
+                     data-action="click->modal#open"
+                     data-product-id="<%= product.id %>"
+                     data-variant-sku="<%= variant.variant_sku %>"
+                     class="absolute inset-0 z-10"></a>
+                  <div class="flex items-center gap-x-3">
+                    <% if variant.images.attached? %>
+                      <%= image_tag variant.images.first.variant(resize_to_limit: [38, 38]), class: "shrink-0 h-10 w-10 rounded-md object-cover", alt: "#{product.title} Image" %>
+                    <% else %>
+                      <img class="shrink-0 h-10 w-10 rounded-md object-cover" src="placeholder.jpg" alt="No Image">
+                    <% end %>
+                    <div class="flex-1">
+                      <span class="text-sm font-medium text-stone-800 dark:text-neutral-200">
+                        <%= product.title %>
+                      </span>
+                      <br>
+                      <span class="text-xs text-gray-500 dark:text-neutral-400">
+                        SKU: <%= variant.variant_sku %>
+                      </span>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-3 whitespace-nowrap">
+                  <!-- Change Percentage (Replace with actual data) -->
+                  <span class="text-sm text-stone-600 dark:text-neutral-400">
+                    N/A
+                  </span>
+                </td>
+                <td class="px-6 py-3 whitespace-nowrap">
+                  <span class="text-sm text-stone-600 dark:text-neutral-400">
+                    $<%= number_to_currency(variant.variant_price, unit: '') %>
+                  </span>
+                </td>
+                <td class="px-6 py-3 whitespace-nowrap">
+                  <!-- Sold Quantity (Replace with actual data) -->
+                  <span class="text-sm text-stone-600 dark:text-neutral-400">
+                    N/A
+                  </span>
+                </td>
+                <td class="px-6 py-3 whitespace-nowrap">
+                  <!-- Sales Amount (Replace with actual data) -->
+                  <span class="font-semibold text-sm text-stone-800 dark:text-neutral-200">
+                    N/A
+                  </span>
+                </td>
+                <td class="px-6 py-3 whitespace-nowrap">
+                  <% if variant.qr_code_image.attached? %>
+                    <%= image_tag variant.qr_code_image.variant(resize_to_limit: [50, 50]), alt: "QR Code for #{product.title} - #{variant.variant_sku}" %>
+                  <% else %>
+                    <span class="text-sm text-red-500">No QR Code</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+        <!-- End Table -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- ... (Include your existing Footer code if applicable) -->
+  </div>
+  <!-- End Products Table Card -->
+
+  <!-- Pagination -->
+  <div class="mt-5">
+    <%= paginate @products %>
+  </div>
+
+  <!-- Modal Component -->
+  <div data-controller="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden z-50" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="bg-white dark:bg-neutral-800 rounded-lg overflow-hidden w-full max-w-4xl" role="document">
+      <div class="flex justify-between items-center px-6 py-4 border-b dark:border-neutral-700">
+        <h2 class="text-xl font-semibold" data-modal-target="title" id="modal-title">Product Details</h2>
+        <button data-action="click->modal#close" class="text-gray-500 hover:text-gray-700 dark:text-neutral-400 dark:hover:text-neutral-200 focus:outline-none" aria-label="Close">
+          <!-- SVG for Close Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto max-h-screen" data-modal-target="content" aria-labelledby="modal-title">
+        <!-- Product details will be loaded here -->
+        <p class="text-center">Loading...</p>
+      </div>
+      <div class="px-6 py-4 border-t dark:border-neutral-700 flex justify-end space-x-4">
+        <button data-action="click->modal#close" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-neutral-200 bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Close
+        </button>
+        <button data-action="click->modal#print" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Print QR Code
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal Component -->
+</div>
+<script src="https://storage.googleapis.com/pre-line-cdn/google_preline.js"></script>

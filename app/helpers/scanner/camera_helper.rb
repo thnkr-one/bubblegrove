@@ -1,0 +1,2 @@
+module Scanner::CameraHelper
+end

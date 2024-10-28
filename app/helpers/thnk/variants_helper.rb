@@ -1,0 +1,2 @@
+module Thnk::VariantsHelper
+end

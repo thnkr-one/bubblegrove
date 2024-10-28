@@ -1,0 +1,61 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thnk_product: one
+  variant_sku: MyString
+  variant_grams: 9.99
+  variant_inventory_tracker: MyString
+  variant_inventory_policy: MyString
+  variant_fulfillment_service: MyString
+  variant_price: 9.99
+  variant_compare_at_price: 9.99
+  variant_requires_shipping: false
+  variant_taxable: false
+  variant_barcode: MyString
+  image_src: MyString
+  image_position: 1
+  image_alt_text: MyString
+  gift_card: false
+  seo_title: MyString
+  seo_description: MyString
+  variant_image: MyString
+  variant_weight_unit: MyString
+  variant_tax_code: MyString
+  cost_per_item: 9.99
+  included_us: false
+  price_us: 9.99
+  compare_at_price_us: 9.99
+  included_international: false
+  price_international: 9.99
+  compare_at_price_international: 9.99
+  product_collection: MyString
+
+two:
+  thnk_product: two
+  variant_sku: MyString
+  variant_grams: 9.99
+  variant_inventory_tracker: MyString
+  variant_inventory_policy: MyString
+  variant_fulfillment_service: MyString
+  variant_price: 9.99
+  variant_compare_at_price: 9.99
+  variant_requires_shipping: false
+  variant_taxable: false
+  variant_barcode: MyString
+  image_src: MyString
+  image_position: 1
+  image_alt_text: MyString
+  gift_card: false
+  seo_title: MyString
+  seo_description: MyString
+  variant_image: MyString
+  variant_weight_unit: MyString
+  variant_tax_code: MyString
+  cost_per_item: 9.99
+  included_us: false
+  price_us: 9.99
+  compare_at_price_us: 9.99
+  included_international: false
+  price_international: 9.99
+  compare_at_price_international: 9.99
+  product_collection: MyString

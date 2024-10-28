@@ -1,0 +1,45 @@
+<nav class=" relative isolate">
+<!--
+  <div class="absolute inset-x-0 top-4 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl" aria-hidden="true">
+    <div class="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-10" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
+  </div>
+-->
+  <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen p-4 pr-4">
+    <%= link_to root_path, class: "flex items-center space-x-3 rtl:space-x-reverse" do %>
+      <%# image_tag 'bubble_concept_black.svg', class: "h-24 rounded-3xl" %>
+      <!--<img src="https://roor-bucket.nyc3.cdn.digitaloceanspaces.com/thnk_logo_two.jpeg" class="h-7 rounded-3xl" alt="Logo" />-->
+      <span class="inline-flex items-center text-3xl font-extralight whitespace-nowrap text-black">
+          <%= image_tag 'bubble_concept_black.svg', class: "inline-block h-14 -mr-7 relative bottom-0.5" %>
+        ubble
+      </span>
+
+      <!--<span class="self-center text-2xl font-semibold whitespace-nowrap text-white">bubble 🫧</span>-->
+    <% end %>
+    <button data-collapse-toggle="mega-menu-full-image" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mega-menu-full-image" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      </svg>
+    </button>
+    <div id="mega-menu-full-image" class=" items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+      <ul class=" flex flex-col mt-4 font-light md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
+        <li><%= link_to 'Home', root_path, class: "font-light block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>
+        <li><%= link_to 'Dashboard', '#', class: "font-light block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>
+        <li><%= link_to 'Assistants', '#', class: "font-light block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>
+        <!--<li><%# link_to 'API', '#', class: "block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>-->
+        <!--<li><%# link_to 'Prompts', '#', class: "font-light block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>-->
+        <li><%= link_to 'Pricing', '#', class: "font-light block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>
+        <li><%= link_to 'Account', '#', class: "font-light block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>
+        <li><%# link_to 'Contact', '#', class: "font-extralight block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<script>
+    const hamburgerButton = document.querySelector(".inline-flex.items-center");
+    const megaMenu = document.getElementById("mega-menu-full-image");
+    function toggleMenu() {
+        megaMenu.classList.toggle("hidden");
+    }
+    hamburgerButton.addEventListener("click", toggleMenu);
+</script>
