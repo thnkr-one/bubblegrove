@@ -36,16 +36,3 @@ Things you may want to cover:
     add_index :thnk_products, :status
 ```
 
-fly secrets set AWS_ACCESS_KEY_ID=tid_vMxdrwtnR_ugUHImSKrEQjYlGLRmeqoQdbvS_bAkmUdjSzWIPm
-fly secrets set AWS_ENDPOINT_URL_S3=https://fly.storage.tigris.dev
-fly secrets set AWS_REGION=auto
-fly secrets set AWS_SECRET_ACCESS_KEY=tsec_6znL+6gmiPL2lwwgSyuzLHNGMU3CjDKf6crnnRL_qf4ejXDMhZb87PqKo4H-7yYbIBTMMv
-fly secrets set BUCKET_NAME=bubblegrove
-fly secrets set DATABASE_URL=postgres://bubblegrove:ZHiL3zpeXP3ADOu@bubblescan-db.flycast:5432/bubblegrove?sslmode=disable
-fly secrets set DATABASE_USERNAME=postgres
-fly secrets set DATABASE_PASSWORD=xI6UMY2T4zEa5HN
-fly secrets set DATABASE_HOSTNAME=bubblescan-db.internal
-fly secrets set Flycast=fdaa:a:1d97:0:1::28
-fly secrets set DATABASE_PROXY_PORT=5432
-fly secrets set DATABASE_POSTGRES_PORT=5433
-fly secrets set DATABASE_CONNECTION_STRING=postgres://postgres:xI6UMY2T4zEa5HN@bubblescan-db.flycast:5432
